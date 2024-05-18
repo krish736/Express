@@ -1,22 +1,16 @@
 const express = require("express");
 const app = express();
-let { people } = require("./data");
 
+const people = require("./routes/people");
+const auth = require("./routes/auth");
+
+app.use(express.static("./methods-public"));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.delete("/api/postman/people/:id", (req, res) => {
-  const { id } = req.params;
-
-  const person = people.find((person) => person.id === Number(id));
-
-  if (!person) {
-    res.status(404).send({ success: false, msg: `${id} does not exist!` });
-  }
-
-  const newPeople = people.filter((person) => person.id !== Number(id))
-  res.status(200).json(newPeople)
-});
+app.use("/api/people", people);
+app.use("/login", auth);
 
 app.listen(5000, () => {
-  console.log("listening...");
+  console.log("Server is listening on port 5000....");
 });
