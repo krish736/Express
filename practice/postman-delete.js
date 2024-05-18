@@ -13,8 +13,8 @@ app.delete("/api/postman/people/:id", (req, res) => {
     res.status(404).send({ success: false, msg: `${id} does not exist!` });
   }
 
-  const newPeople = people.filter((person) => person.id !== Number(id))
-  res.status(200).json(newPeople)
+  const newPeople = people.filter((person) => person.id !== Number(id));
+  res.status(200).json(newPeople);
 });
 
 app.listen(5000, () => {
