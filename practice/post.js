@@ -11,7 +11,7 @@ app.get("/api/people", (req, res) => {
 });
 
 app.post("/api/people", (req, res) => {
-  const {name} = req.body;
+  const { name } = req.body;
   console.log(name);
   if (name) {
     res.status(201).json({ success: true, person: name });
